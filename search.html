@@ -107,10 +107,11 @@
     filtered(function(r){return (r.l||'').toLowerCase()===n;},
              'person with the surname','people with the surname', sn);
   }
-  // given-name mode: first-name match.
+  // given-name mode: whole-word match within the given name(s), so "Lucy"
+  // finds "Ada Lucy" and "Lucy Christina" but "Ann" does not pull in "Anna".
   function givenSearch(gn){
     var n=gn.toLowerCase();
-    filtered(function(r){return (r.g||'').toLowerCase().indexOf(n)>=0;},
+    filtered(function(r){return (' '+(r.g||'').toLowerCase()+' ').indexOf(' '+n+' ')>=0;},
              'person with the given name','people with the given name', gn);
   }
 
