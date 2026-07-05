@@ -73,7 +73,16 @@ net.ContentLoader.prototype.defaultError=function(){
 function showPreview(mediaID,medialinkID,path,entitystr,sitever) {
 	if(jQuery('#prev'+entitystr).html() == "") {
 		var caption_div = sitever != "mobile" ? '<div class=\"prev-caption\" id=\"capt' + entitystr + '\"></div>' : '<div class=\"prev-close\"><img id=\"close-' + entitystr + '\" src='+ cmstngpath + '"img/tng_close.gif"/></div>';
-		jQuery('#prev'+entitystr).html('<div id="ld'+entitystr+'"><img src="' + cmstngpath + 'img/spinner.gif" style="border:0px"> '+loadingmsg+'</div><a href="' + cmstngpath + 'showmedia.php?mediaID=' + mediaID + '&medialinkID=' + medialinkID + '"><img src="' + smallimage_url + 'mediaID=' + mediaID + '&path=' + encodeURIComponent(path) + '" style="display:none" onload="jQuery(\'#ld\'+\'' + entitystr + '\').hide(); this.style.display=\'\';"/></a>' + caption_div);
+		// STATIC ARCHIVE FIX: on the live site this preview loaded a resized image
+		// from ajx_smallimage.php, and that image's onload hid the "Loading..."
+		// spinner. That PHP endpoint does not exist in the static archive, so the
+		// onload never fired and the popup spun on "Loading..." forever. The real
+		// image path is passed in as `path` and the file exists locally, so point
+		// the preview straight at it (sized by the .media-prev img rule in CSS).
+		// The enlarged image is given the "Open full size" trigger so that once
+		// the pointer reaches it, a click opens the full-size lightbox.
+		var imgsrc = cmstngpath + decodeURIComponent(path);
+		jQuery('#prev'+entitystr).html('<a href="' + imgsrc + '" title="Open full size"><img src="' + imgsrc + '" alt=""/></a>' + caption_div);
 		pageWidth = jQuery(window).width();
 		parent = jQuery('#prev'+entitystr).parent();
 		currX = parent.position().left;
@@ -84,24 +93,28 @@ function showPreview(mediaID,medialinkID,path,entitystr,sitever) {
 			jQuery('#prev'+entitystr).css('right',width + 'px');
 			jQuery('#prev'+entitystr).css('background-image','url(img/media-prevbg-rotated.png)')
 		}
-		if(sitever != "mobile" && (mediaID || medialinkID)) {
-			//ajax call to get title & description 
-			var params = {mediaID:mediaID,medialinkID:medialinkID};
-			jQuery.ajax({
-				url: cmstngpath + 'ajx_caption.php',
-				data: params,
-				dataType: 'html',
-				success: function(req){
-					jQuery('#capt'+ entitystr).html(req);
-				}
-			});
-		}
+		// STATIC ARCHIVE FIX: removed the ajx_caption.php AJAX call that fetched
+		// the popup title/description on the live site (dead endpoint here). The
+		// description is already shown beside each thumbnail on the page.
+		// Keep the preview open while the pointer is over it, so the user can
+		// move from the thumbnail onto the enlarged image and click it.
+		jQuery('#prev'+entitystr)
+			.on('mouseenter', function(){ clearTimeout(previewCloseTimers[entitystr]); })
+			.on('mouseleave', function(){ closePreview(entitystr); });
 	}
+	clearTimeout(previewCloseTimers[entitystr]);
 	jQuery('#prev'+entitystr).fadeIn(100);
 }
 
+// STATIC ARCHIVE FIX: close the preview after a short delay rather than
+// instantly, so the pointer can travel from the thumbnail (whose mouseout
+// triggers the close) onto the preview popup without it vanishing first.
+var previewCloseTimers = {};
 function closePreview(entitystr) {
-	jQuery('#prev'+entitystr).fadeOut(100);
+	clearTimeout(previewCloseTimers[entitystr]);
+	previewCloseTimers[entitystr] = setTimeout(function(){
+		jQuery('#prev'+entitystr).fadeOut(100);
+	}, 260);
 }
 
 var loginOverlay;
@@ -317,3 +330,41 @@ jQuery(document).ready(function() {
 		return false;
 	});
 });
+
+// STATIC ARCHIVE: in-page image lightbox.
+// On the live site, opening a media image full size showed it in a lightbox
+// overlay with a close control. In the static archive those "Open full size"
+// links were left as plain <a href="photo.jpg" target="_blank">, which dumped
+// the visitor onto a chrome-less raw image with no obvious way back. Intercept
+// those clicks and show the image in a simple overlay that dismisses on any
+// click, on the X, or with the Esc key. Non-image targets are left untouched.
+// Bound as a self-contained IIFE (not inside jQuery ready) so it does not
+// depend on any other ready-callback succeeding first. The delegated handler
+// only needs `document` (which exists now); the overlay is built lazily on
+// first use, by which time <body> exists.
+(function() {
+	var ov = null;
+	function lbClose() {
+		if(ov) { ov.removeClass('open'); ov.find('img').attr('src', ''); }
+	}
+	function lbEnsure() {
+		if(ov) return ov;
+		ov = jQuery('<div id="archive-lightbox"><span class="al-close" title="Close">×</span><img alt=""><div class="al-caption"></div></div>');
+		ov.on('click', lbClose);
+		jQuery('body').append(ov);
+		return ov;
+	}
+	jQuery(document).on('click', 'a[title="Open full size"]', function(e) {
+		var href = jQuery(this).attr('href') || '';
+		if(!/\.(jpe?g|png|gif)$/i.test(href)) return; // let non-images open normally
+		e.preventDefault();
+		jQuery('.media-prev').hide(); // dismiss any hover-preview popup underneath
+		var o = lbEnsure();
+		o.find('img').attr('src', href);
+		o.find('.al-caption').text(jQuery(this).find('img').attr('alt') || '');
+		o.addClass('open');
+	});
+	jQuery(document).on('keydown', function(e) {
+		if((e.key === 'Escape' || e.keyCode === 27) && ov && ov.hasClass('open')) lbClose();
+	});
+})();
