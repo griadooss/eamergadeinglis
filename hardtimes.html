@@ -1,32 +1,124 @@
-<?php
-//Remove the following two lines before deploying copies of this file to the "histories" folder.
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Hard Times: Our Family History</title>
+<meta name="Keywords" content="" />
+<meta name="Description" content="WOODS, David: Our Family History" />
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+<link rel="shortcut icon" href="/favicon.ico"/>
+<link href="css/genstyle.css" rel="stylesheet" type="text/css" />
+<link href="templates/template12/css/tngtabs2.css" rel="stylesheet" type="text/css" />
+<link href="templates/template12/css/templatestyle.css" rel="stylesheet" type="text/css" />
+<script src="js/vendor/jquery-3.4.1.min.js" type="text/javascript" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous"></script>
+<script src="js/vendor/jquery-ui.min.js" type="text/javascript" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/net.js"></script>
+<script type="text/javascript">var tnglitbox;</script>
+
+<script type = 'text/javascript'>
+function togglednaicon() {
+   if ($('.toggleicon2').attr('src').indexOf('desc') > 0) {
+      $('.toggleicon2').attr('src',cmstngpath + 'img/tng_sort_asc.gif')
+      $('.toggleicon2').attr('title', 'Collapse');
+      $('.dnatest').show();
+   }
+   else {
+      $('.toggleicon2').attr('src',cmstngpath + 'img/tng_sort_desc.gif')
+      $('.toggleicon2').attr('title', 'Expand');
+      $('.dnatest').hide();
+   }
+}
+
+function show_dnatest() {
+      $('.toggleicon2').attr('src',cmstngpath + 'img/tng_sort_asc.gif')
+      $('.toggleicon2').attr('title', 'Collapse');
+      $('.dnatest').show();
+}
+
+function hide_dnatest() {
+      $('.toggleicon2').attr('src',cmstngpath + 'img/tng_sort_desc.gif')
+      $('.toggleicon2').attr('title', 'Expand');
+      $('.dnatest').hide();
+}
+</script>
+<link href="templates/template12/css/mytngstyle.css" rel="stylesheet" type="text/css" />
 
 
-//Replace all the "include" lines in your pre-5.x histories with the following lines (up to the next comment)
-include( "../begin.php");   //Nuke users must include "../../../begin.php" here
-if( !$cms['support'] )
-	$cms['tngpath'] = "../";
-include($cms['tngpath'] ."genlib.php");
-include($cms['tngpath'] ."getlang.php");
-include($cms['tngpath'] ."$mylanguage/text.php");
-tng_db_connect($database_host,$database_name,$database_username,$database_password) or exit;
-include($cms['tngpath'] ."checklogin.php");
-include($cms['tngpath'] . "log.php" );
-//end of new include lines
+<script type="text/javascript" src="js/tngmenuhover2.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+var tnglitbox;
+var share = 0;
+var closeimg = "img/tng_close.gif";
+var smallimage_url = 'ajx_smallimage.php?';
+var cmstngpath='';
+var loadingmsg = 'Loading...';
+var expand_msg = "Expand";
+var collapse_msg = "Collapse";
+//]]>
+</script>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="tngrss.html" />
 
-$logstring = "<a href=\"/path_to_your_history_folder/this_file_name\">Hard Times</a>";
-writelog($logstring);
-preparebookmark($logstring);
+<!-- The Next Generation of Genealogy Sitebuilding, v.13.0.3 (17 February 2021), Written by Darrin Lythgoe, 2001-2026 -->
+  <link rel="stylesheet" href="css/archive-fix.css">
+</head>
+<body id="bodytop" class="hardtimes publicbody">
+		<a name="top"></a>
+	<div id="cb-main">
+		<header class="cb-header clearfix">		
+			<div class="cb-shapes">	
+				<h1 class="cb-headline" data-left="25.52%">
+					<a href="index.html"></a>
+				</h1>
+				<h2 class="cb-slogan" data-left="25.52%"></h2>
 
-//Note: histories created this way may function differently that other histories when placed in an "album". If that is annoying to you, consider creating
-//your history by pasting the text into Admin/Media/Body Text instead.
-
-// Remove the comments (leading slashes) on the next line if you don't want the TNG menu icons to show on your history page.
-$flags[noicons] = true;
-tng_header( "Hard Times", $flags ); 
-?>
-<?php echo tng_coreicons(); ?>
-<DIV TYPE=HEADER>
+				<div class="cb-mainimage"><img src="templates/template12/" alt="" /></div>
+			</div>
+			<div class="cb-header-search-box">
+				<table>
+					<tr>
+						<td class="cb-searchtext">
+							<table>
+								<tr>
+									<td class="col1and2">
+										<a><span class="cb-searchtext">First Name</span></a>
+									</td>
+									<td class="col1and2" colspan="2">
+										<a><span class="cb-searchtext">Last Name</span></a>
+									</td>
+								</tr>
+								<tr>
+									<form class="cb-search" id="topsearchform" name="topsearchform" method="get" 
+										action="search.html">
+										<td class="col1and2">
+											<input type="hidden" value="AND" name="mybool" />
+											<input size="17" name="myfirstname" type="text" id="myfirstname" />
+										</td><td class="col1and2">
+											<input size="17" name="mylastname" type="text" id="mylastname" />
+										</td><td >
+											<input class="cb-search-button" type="submit" value="&nbsp;&nbsp;">
+										</td>
+									</form>
+								</tr>
+								<script>
+									document.topsearchform.myfirstname.focus();
+								</script>
+								<tr>
+									<td id="cb-header-links">
+										<a href="search.html">[Advanced Search]</a>
+									</td><td colspan="2" id="cb-header-links">
+										<a href="surnames.html">[Surnames]</a>
+										<br />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				
+			</div>
+		</header>   
+		<div class="cb-sheet clearfix">
+<div class="cb-tng-area"><DIV TYPE=HEADER>
 	<P ALIGN=CENTER STYLE="margin-bottom: 0in"><FONT SIZE=4 STYLE="font-size: 16pt"><B>HARD
 	TIMES</B></FONT></P>
 	<P ALIGN=CENTER STYLE="margin-bottom: 0in">Grandparents Spencer</P>
@@ -130,4 +222,32 @@ peacefully slipped away. She was the last of her generation in our
 family.</P>
 <P ALIGN=LEFT STYLE="text-indent: 0.2in; margin-bottom: 0in"><BR>
 
-<?php tng_footer( "" ); ?>
+</div>		<footer class="cb-footer clearfix">
+			<div class="cb-content-layout layout-item-0">
+				<div class="cb-content-layout-row">
+					<div class="cb-layout-cell" style="width: 100%">
+						<br/>
+							<div class="hg-footertext">
+							<p class="smaller center">This site powered by <a href="https://tngsitebuilding.com" class="footer" target="_blank" title="Learn more about TNG">The Next Generation of Genealogy Sitebuilding</a> v. 13.0.3,  written by Darrin Lythgoe  &copy; 2001-2026.</p>
+<p class="smaller center">Maintained by John G Eamer.</p>
+							</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>  
+</div>
+<script type="text/javascript" src="js/litbox.js"></script>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=4696829;
+var sc_invisible=1;
+var sc_security="80795caf";
+</script>
+
+<noscript><div
+class="statcounter"></div></noscript>
+<!-- End of StatCounter Code -->
+
+</body>
+</html>
