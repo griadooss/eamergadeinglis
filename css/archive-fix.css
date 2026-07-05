@@ -60,3 +60,8 @@ a[href="anniversaries.html"], a[href="bookmarks.html"], a[href="browse_dna_tests
 #home-smicon, #search-smicon { background: none !important; }
 .icons .tngsmallicon:hover, #tngdd#tngdd > li:hover > a { background: rgba(58,43,32,.16) !important; color: #1e140c !important; }
 #tngdd#tngdd > li > ul li a { font-size: 15px !important; padding: 9px 18px !important; font-variant: normal; }
+
+/* Event Map: a live Google-Maps feature that can't work on a static archive
+   (blank map, dead 'Link to Google Earth', pointless pin legend). Event places
+   remain in the main person table, so hide the whole dead section. */
+#eventmap { display: none !important; }
