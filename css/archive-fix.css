@@ -39,3 +39,8 @@ a[href="anniversaries.html"], a[href="bookmarks.html"], a[href="browse_dna_tests
    titletop.jpg that was never part of the live site (header is text-based).
    The <img alt=""> collapses invisibly, but hide the empty band explicitly. */
 .cb-mainimage { display: none !important; }
+
+/* Dead Share / Print / Bookmark toolbar (site-wide): Print opens a PHP print
+   URL, Share and Bookmark call server-side scripts — all inert on a static
+   archive. Hidden here so it disappears from every page in one place. */
+.icons-rt { display: none !important; }
