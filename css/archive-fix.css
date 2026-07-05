@@ -44,3 +44,19 @@ a[href="anniversaries.html"], a[href="bookmarks.html"], a[href="browse_dna_tests
    URL, Share and Bookmark call server-side scripts — all inert on a static
    archive. Hidden here so it disappears from every page in one place. */
 .icons-rt { display: none !important; }
+
+/* ===== Single-row top navigation (replaces the template's fragile 2-row menu).
+   Home/Search (.icons) and Find/Media/Info (#tngdd) are forced into one inline
+   row, enlarged, with the sprite icons dropped for a clean text nav. ===== */
+.menucontainer, .innercontainer { position: static !important; height: auto !important; overflow: visible !important; }
+.innercontainer { padding: 0 6px !important; }
+.icons, #tngdd { position: static !important; float: none !important; display: inline-block !important;
+  vertical-align: middle; margin: 0 !important; padding: 0 !important; }
+.icons .tngsmallicon, #tngdd#tngdd > li > a {
+  display: inline-block !important; font-size: 17px !important; padding: 12px 20px !important;
+  margin: 0 !important; line-height: 1.2 !important; background-image: none !important;
+  text-indent: 0 !important; color: #3a2b20 !important; text-decoration: none !important;
+  font-variant: small-caps; letter-spacing: .03em; }
+#home-smicon, #search-smicon { background: none !important; }
+.icons .tngsmallicon:hover, #tngdd#tngdd > li:hover > a { background: rgba(58,43,32,.16) !important; color: #1e140c !important; }
+#tngdd#tngdd > li > ul li a { font-size: 15px !important; padding: 9px 18px !important; font-variant: normal; }
