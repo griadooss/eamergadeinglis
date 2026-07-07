@@ -47,10 +47,25 @@ Largest single file is a 23 MB mp3 — under GitHub's 100 MB/file limit.
 
 ## Privacy
 
-Safe to publish. The archive was crawled **as a guest**, so TNG's living-person
-privacy rules already applied: 769 living people are excluded and the search
-index covers only the 1,053 public people. Do not re-introduce living-person
-detail from the master.
+The archive was crawled **as a guest**. The client-side **search index** covers
+only the 1,053 public people (the 769 living are excluded from search), and the
+769 living person pages are `Disallow`-ed in `robots.txt`.
+
+**Important nuance (do not misread the above):** living people are excluded from
+*search*, but their individual `person_I*.html` pages **do exist** and mirror the
+live TNG data — because the live site was configured *Show Living Data: Always*,
+the guest crawl captured them. So "living people are excluded" applies to the
+search index, NOT to the site as a whole.
+
+Because of that, the guest crawl also captured a handful of **living people's
+present-day contact details** (home address / phone / email). Those were scrubbed
+on 7 Jul 2026 to match the GEDCOM deposit policy: present-day contact channels
+(phone/email) and living people's current home addresses were removed from
+`person_I338`, `person_I340`, `person_I1195` and the phone from `person_I333`
+(Betty Braybrook — her residence was kept as heritage, by the custodian's choice).
+**Deceased ancestors' historical addresses (residences, wills, census) are kept
+as genuine family history.** Do not re-introduce living-person contact detail
+from the master.
 
 ## Rules for anyone (human or AI) working in here
 
