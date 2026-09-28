@@ -102,9 +102,15 @@ from the master.
   conclude the page is broken when it is fine.
 - Local preview needs no server: Apache already serves this directory as
   localhost/eamergadeinglis/ through a symlink in `~/www`.
-- Still outstanding: cancel the Hostinger Premium plan (renews 2027-03-08).
-  That is blocked until zimpics.com email moves off Hostinger, because the
-  archive's contact address forwards to a mailbox there.
+- Mail for the domain: there is no custom rule for contact@eamergadeinglis.net —
+  it arrives through the Email Routing catch-all, which forwards to
+  john.eamer@zimpics.com. That mailbox is on **Migadu**, not Hostinger
+  (zimpics.com MX verified 28 Sep 2026), so it is unaffected by cancelling the
+  Hostinger plan. Its real dependency is the Migadu subscription and the
+  zimpics.com renewal — both of which need a living custodian, which is why the
+  About page leads with the NLA copy and not with this address.
+- Cancelling the Hostinger Premium plan (renews 2027-03-08) is clear to proceed:
+  nothing this archive depends on is hosted there any longer.
 - The old "deposit the GEDCOM with WikiTree / FamilySearch" step was **dropped**.
   The custodian chose instead to keep the one existing Ancestry tree
   (named EamerGadeInglis, id 176377489) as the canonical online tree; it is
