@@ -13,18 +13,25 @@ and no third-party tracking beyond a single hostname-gated visitor counter.
 
 ## Where this archive lives
 
-It is kept in three independent places, deliberately, so that no one person,
+It is kept in four independent places, deliberately, so that no one person,
 subscription or domain name can take it away:
 
 | Copy | Address | What it needs to survive |
 |---|---|---|
 | National Library of Australia, Australian Web Archive | nla.gov.au/nla.arc-173503 | nothing — held under legal deposit |
+| Software Heritage (non-profit, UNESCO-supported) | archive.softwareheritage.org — origin github.com/griadooss/eamergadeinglis | nothing — its charter is preservation |
 | This repository | github.com/griadooss/eamergadeinglis | GitHub, or any copy anyone has cloned |
 | Ancestry public member tree, "EamerGadeInglis" | tree 176377489 | Ancestry, and the tree staying public |
 
 The National Library copy is the durable one. It is free to read, asks for no
 account, and depends on neither the domain, the host, nor the custodian. Anyone
 who finds this archive long after it was made should begin there.
+
+Software Heritage is the second durable copy, and it preserves something the
+others do not: the **git repository itself**, history and all, taken on
+28 September 2026 (snapshot swh:1:snp:dd80cb0ec551d0b45ff51f5ef51ba2a32626257a).
+The National Library holds the website as a reader sees it; Software Heritage
+holds the thing you would rebuild it from. Either can be used without the other.
 
 ## Hand-over notes for a future custodian
 
